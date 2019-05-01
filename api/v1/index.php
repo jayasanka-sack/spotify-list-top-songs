@@ -48,7 +48,7 @@ $app->get('/get-token', function ($request, $response, $args) {
 
 
 $app->get('/get-songs', function ($request, $response, $args) {
-    $url = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=2&offset=5';
+    $url = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=5';
     $data = array(
 
     );
@@ -70,6 +70,13 @@ $app->get('/get-songs', function ($request, $response, $args) {
     $resultObj = json_decode($result);
 
     return $response->withStatus(200)->withJson($resultObj);
+
+});
+
+
+$app->get('/display-token', function ($request, $response, $args) {
+    $payload = array("token"=>$_SESSION['access_token']);
+    return $response->withStatus(200)->withJson($payload);
 
 });
 

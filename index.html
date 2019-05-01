@@ -8,7 +8,15 @@
 </head>
 <body>
 <div class="container">
-    <a href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
+    <div class="mt-5">
+        <a class="btn btn-success" href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
+
+    </div>
+
+<div id="songs" class="mt-5">
+
+</div>
+
 </div>
 
 </body>
@@ -21,4 +29,21 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+<!--plugin for mustache.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<script src="assets/js/common-functions.js"></script>
+<script id="template-songs" type="text/html">
+    {{#items}}
+    <div class="row">
+        <p>{{name}}</p>
+    </div>
+    {{/items}}
+</script>
+
+<script>
+    renderData('#template-songs','/get-songs','#songs')
+</script>
 </html>

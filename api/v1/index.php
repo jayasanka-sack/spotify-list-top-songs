@@ -13,7 +13,7 @@ $app = new \Slim\App([
 $app->get('/get-token', function ($request, $response, $args) {
 
     global $config;
-    $cars = array("Volvo", "BMW", "Toyota");
+
 
     echo $config["spotify"]["clientId"];
 
@@ -42,16 +42,19 @@ $app->get('/get-token', function ($request, $response, $args) {
     $resultObj = json_decode($result);
     $_SESSION["access_token"]=$resultObj->access_token;
 
-    return $response->withStatus(302)->withHeader('Location', '../../hoo.html');
+    return $response->withStatus(302)->withHeader('Location', '../../');
 
 });
 
 
 $app->get('/get-songs', function ($request, $response, $args) {
-    $url = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=10&offset=5';
+
+    $limit = $request->getQueryParam("limit", $default = "10");
+    $url = "https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=$limit&offset=5";
     $data = array(
 
     );
+
 
     $accessToken = $_SESSION["access_token"];
     $options = array(

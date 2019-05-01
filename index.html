@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="mt-5">
         <a class="btn btn-success"
            href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
@@ -15,7 +15,12 @@
     </div>
 
     <div id="songs" class="row mt-5">
+        <div class="row text-center">
+            <div class="col">
+                <img src="assets/img/loading.gif">
 
+            </div>
+        </div>
     </div>
 
 </div>
@@ -38,13 +43,19 @@
 <script src="assets/js/common-functions.js"></script>
 <script id="template-songs" type="text/html">
     {{#items}}
-    <div class="col-md-3 m-3">
+    <div class="col-md-2 m-3">
         <div class="card">
             <img style="width: 100%" class="card-img-top" src="{{#image}}{{url}}{{/image}}" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">{{name}}</h5>
-                <p class="card-text">
+                <br class="card-text text-black-50">
+                    Artists: {{#artists}}{{name}}</br>
+                {{/artists}}
                 </p>
+                <audio controls style="width: 200px; ">
+                    <source src="{{preview_url}}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
                 <a target="_blank" href="{{#external_urls}}{{spotify}}{{/external_urls}}" class="btn btn-primary">Open
                     in spotify</a>
             </div>
@@ -54,7 +65,7 @@
 </script>
 
 <script>
-    renderData('#template-songs', '/get-songs', '#songs', false, preProccessData)
+    renderData('#template-songs', '/get-songs?limit=50', '#songs', false, preProccessData)
 
     function preProccessData(data) {
         data.items.forEach(function (item) {

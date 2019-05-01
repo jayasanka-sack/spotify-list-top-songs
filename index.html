@@ -9,13 +9,14 @@
 <body>
 <div class="container">
     <div class="mt-5">
-        <a class="btn btn-success" href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
+        <a class="btn btn-success"
+           href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
 
     </div>
 
-<div id="songs" class="mt-5">
+    <div id="songs" class="row mt-5">
 
-</div>
+    </div>
 
 </div>
 
@@ -37,13 +38,31 @@
 <script src="assets/js/common-functions.js"></script>
 <script id="template-songs" type="text/html">
     {{#items}}
-    <div class="row">
-        <p>{{name}}</p>
+    <div class="col-md-3 m-3">
+        <div class="card">
+            <img style="width: 100%" class="card-img-top" src="{{#image}}{{url}}{{/image}}" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">{{name}}</h5>
+                <p class="card-text">
+                </p>
+                <a target="_blank" href="{{#external_urls}}{{spotify}}{{/external_urls}}" class="btn btn-primary">Open
+                    in spotify</a>
+            </div>
+        </div>
     </div>
     {{/items}}
 </script>
 
 <script>
-    renderData('#template-songs','/get-songs','#songs')
+    renderData('#template-songs', '/get-songs', '#songs', false, preProccessData)
+
+    function preProccessData(data) {
+        data.items.forEach(function (item) {
+            console.log(item)
+            item.image = item.album.images[1];
+        })
+
+       return data;
+    }
 </script>
 </html>

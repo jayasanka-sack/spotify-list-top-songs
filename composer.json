@@ -1,0 +1,12 @@
+{
+    "name": "slim basic",
+    "authors": [
+        {
+            "name": "jayasanka weerasinghe"
+        }
+    ],
+    "require": {
+        "slim/slim": "^3.0",
+        "ext-json": "*"
+    }
+}

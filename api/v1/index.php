@@ -1,4 +1,5 @@
 <?php
+session_start();
 require '../../vendor/autoload.php';
 $configFile = file_get_contents("../../config.json");
 $config = json_decode($configFile, true);
@@ -38,8 +39,37 @@ $app->get('/get-token', function ($request, $response, $args) {
         echo "something went wrong";
     }
 
+    $resultObj = json_decode($result);
+    $_SESSION["access_token"]=$resultObj->access_token;
 
-    return $response->withStatus(201)->withJson($result);
+    return $response->withStatus(302)->withHeader('Location', '../../hoo.html');
+
+});
+
+
+$app->get('/get-songs', function ($request, $response, $args) {
+    $url = 'https://api.spotify.com/v1/me/top/tracks?time_range=medium_term&limit=2&offset=5';
+    $data = array(
+
+    );
+
+    $accessToken = $_SESSION["access_token"];
+    $options = array(
+        'http' => array(
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n".
+                "Authorization: Bearer $accessToken\r\n",
+            'method' => 'GET'
+        )
+    );
+    $context = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) { /* Handle error */
+        echo "something went wrong";
+    }
+
+    $resultObj = json_decode($result);
+
+    return $response->withStatus(200)->withJson($resultObj);
 
 });
 

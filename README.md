@@ -7,7 +7,7 @@ insert your spotify client Id and secret inside the file as follows.
 ```
 {
   "spotify": {
-    "clientId": "your client Id""},
+    "clientId": "your client Id"},
     "clientSecret" : "your client secret"
   }
 }

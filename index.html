@@ -9,8 +9,8 @@
 <body>
 <div class="container-fluid">
     <div class="mt-5">
-        <a class="btn btn-success"
-           href="https://accounts.spotify.com/authorize?client_id=e29ade1774424cd7a38b9d95789b264c&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%2Fexperiments%2Fspotify%2Fspotify-list-top-songs%2Fapi%2Fv1%2Fget-token&scope=user-top-read&state=34fFs29kd09">login</a>
+        <a class="btn btn-warning"
+           href="api/v1/logout">logout</a>
 
     </div>
 
@@ -73,7 +73,7 @@
         url: 'config/config.json',
         success: function (data) {
             config = data;
-            renderData('#template-songs', config.server.url+config.server.api+'/get-songs?limit=50', '#songs', false, preProccessData,null,redirectToLogin)
+            renderData('#template-songs', config.server.url+config.server.api+'/get-songs?limit=50', '#songs', false, preProccessData,null,redirectToLoginPage)
         }
     });
 
@@ -87,8 +87,8 @@
        return data;
     }
 
-    function redirectToLogin(){
-        window.location.href = "https://accounts.spotify.com/authorize?client_id="+config.spotify.clientId+"&response_type=code&redirect_uri="+encodeURI(config.spotify.redirectUri)+"&scope=user-top-read&state=34fFs29kd09";
+    function redirectToLoginPage(){
+        window.location.href = "login.html";
     }
 </script>
 </html>

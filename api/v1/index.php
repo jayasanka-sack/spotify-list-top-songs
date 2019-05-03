@@ -24,7 +24,7 @@ $app->get('/get-token', function ($request, $response, $args) {
     $data = array(
         'grant_type' => 'authorization_code',
         'code' => $request->getQueryParam("code", $default = ""),
-        'redirect_uri' => $config["spotify"]["redirectUri"],
+        'redirect_uri' => $config["server"]["url"].$config["server"]["api"]."/get-token",
         'client_id' => $config["spotify"]["clientId"],
         'client_secret' => $secretConfig["spotify"]["clientSecret"]
     );
@@ -80,9 +80,9 @@ $app->get('/get-songs', function ($request, $response, $args) {
 });
 
 
-$app->get('/display-token', function ($request, $response, $args) {
-    $payload = array("token"=>$_SESSION['access_token']);
-    return $response->withStatus(200)->withJson($payload);
+$app->get('/logout', function ($request, $response, $args) {
+   session_destroy();
+    return $response->withStatus(302)->withHeader('Location', '../../login');
 
 });
 

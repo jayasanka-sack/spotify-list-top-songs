@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="mt-5">
+        <button class="btn btn-success" onclick="redirectToLogin()">login</button>
+
+    </div>
+
+
+</div>
+
+</body>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="assets/js/bootstrap-notify.js"></script>
+<!--plugin for mustache.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+<script src="assets/js/common-functions.js"></script>
+
+
+<script>
+
+    let config = null;
+
+    $.ajax({
+        dataType: "json",
+        url: 'config/config.json',
+        success: function (data) {
+            config = data;
+        }
+    });
+
+
+    function redirectToLogin(){
+        window.location.href = "https://accounts.spotify.com/authorize?client_id="+config.spotify.clientId+"&response_type=code&redirect_uri="+encodeURI(config.server.url+config.server.api+'/get-token')+"&scope=user-top-read&state=34fFs29kd09";
+    }
+</script>
+</html>

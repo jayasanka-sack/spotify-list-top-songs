@@ -1,7 +1,7 @@
 <?php
 session_start();
 require '../../vendor/autoload.php';
-$configFile = file_get_contents("../../config.json");
+$configFile = file_get_contents("config/config.json");
 $config = json_decode($configFile, true);
 
 $app = new \Slim\App([

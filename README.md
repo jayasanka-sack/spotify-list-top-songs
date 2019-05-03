@@ -38,7 +38,7 @@ Add your client secret to ***/api/v1/config.config.json*** file
 ```
 ## Step 5:
 
-Add your following details to ***config/config.config.json*** file
+Add your following details to ***config/config.json*** file
 ```
 {
   "spotify": {

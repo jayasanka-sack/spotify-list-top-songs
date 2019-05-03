@@ -1,9 +1,8 @@
 # List Users Top Spotify songs
 
-before you start the project create a file named config.json in root folder. <br/>
 Create your sporify app from here: <br/>
 https://developer.spotify.com/dashboard/applications<br/>
-insert your spotify client Id and secret inside the file as follows.
+Add your client ID and client secret to ***/api/v1/config.config.json*** file
 ```
 {
   "spotify": {

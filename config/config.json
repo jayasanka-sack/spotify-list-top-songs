@@ -1,0 +1,10 @@
+{
+  "spotify": {
+    "clientId": "e29ade1774424cd7a38b9d95789b264c",
+    "redirectUri" : "http://localhost/experiments/spotify/spotify-list-top-songs/api/v1/get-token"
+  },
+  "server": {
+    "url" : "http://localhost/experiments/spotify/spotify-list-top-songs",
+    "api" : "/api/v1"
+  }
+}

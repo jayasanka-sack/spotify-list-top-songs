@@ -1,8 +1,10 @@
 <?php
 session_start();
 require '../../vendor/autoload.php';
-$configFile = file_get_contents("config/config.json");
-$config = json_decode($configFile, true);
+$mainConfigFile = file_get_contents("../../config/config.json");
+$secretConfigFile = file_get_contents("config/config.json");
+$config = json_decode($mainConfigFile, true);
+$secretConfig = json_decode($secretConfigFile, true);
 
 $app = new \Slim\App([
     'settings' => [
@@ -13,6 +15,7 @@ $app = new \Slim\App([
 $app->get('/get-token', function ($request, $response, $args) {
 
     global $config;
+    global $secretConfig;
 
 
     echo $config["spotify"]["clientId"];
@@ -21,9 +24,9 @@ $app->get('/get-token', function ($request, $response, $args) {
     $data = array(
         'grant_type' => 'authorization_code',
         'code' => $request->getQueryParam("code", $default = ""),
-        'redirect_uri' => "http://localhost/experiments/spotify/spotify-list-top-songs/api/v1/get-token",
+        'redirect_uri' => $config["spotify"]["redirectUri"],
         'client_id' => $config["spotify"]["clientId"],
-        'client_secret' => $config["spotify"]["clientSecret"]
+        'client_secret' => $secretConfig["spotify"]["clientSecret"]
     );
 
     $options = array(

@@ -65,7 +65,18 @@
 </script>
 
 <script>
-    renderData('#template-songs', '/get-songs?limit=50', '#songs', false, preProccessData)
+
+    let config = null;
+
+    $.ajax({
+        dataType: "json",
+        url: 'config/config.json',
+        success: function (data) {
+            config = data;
+            renderData('#template-songs', config.server.url+config.server.api+'/get-songs?limit=50', '#songs', false, preProccessData,null,redirectToLogin)
+        }
+    });
+
 
     function preProccessData(data) {
         data.items.forEach(function (item) {
@@ -74,6 +85,10 @@
         })
 
        return data;
+    }
+
+    function redirectToLogin(){
+        window.location.href = "https://accounts.spotify.com/authorize?client_id="+config.spotify.clientId+"&response_type=code&redirect_uri="+encodeURI(config.spotify.redirectUri)+"&scope=user-top-read&state=34fFs29kd09";
     }
 </script>
 </html>

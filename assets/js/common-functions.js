@@ -1,10 +1,7 @@
-var serverAddress = 'http://localhost/experiments/spotify/spotify-list-top-songs'
-var api = serverAddress + "/api/v1"
-
 function renderTableData(template, uri, table, successCallback = null, errorCallback = null) {
     $.ajax({
         type: "get",
-        url: api + uri,
+        url: uri,
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             let status = jqXHR.status
@@ -41,7 +38,7 @@ function renderTableData(template, uri, table, successCallback = null, errorCall
 function renderData(template, uri, target, isToAppend = false, successPreCall = null, successCallback = null, errorCallback = null) {
     $.ajax({
         type: "get",
-        url: api + uri,
+        url: uri,
         dataType: "json",
         success: function (data, textStatus, jqXHR) {
             if (successPreCall != null) {

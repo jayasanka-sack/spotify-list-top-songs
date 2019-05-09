@@ -1,9 +1,9 @@
 {
   "spotify": {
-    "clientId": "YOUR_CLIENT_ID"
+    "clientId": "0bf7f70fbefa4385a74cda218a09c18c"
   },
   "server": {
-    "url" : "PATH_TO _YOUR_APPLICATION ex: http://localhost/spotify",
+    "url" : "http://localhost/spotify-list-top-songs",
     "api" : "/api/v1"
   }
 }
